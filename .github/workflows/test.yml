@@ -1,7 +1,8 @@
 name: CI
-
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
+  push:
+    branches: [ main ]
   pull_request:
     branches: [ main ]
   # Allows you to run this workflow manually from the Actions tab
@@ -20,7 +21,7 @@ jobs:
         with:
           path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
+          restore-keys: | 
             ${{ runner.os }}-yarn-
       - name: yarn install
         run: yarn --prefer-offline
